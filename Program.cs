@@ -40,21 +40,22 @@ namespace System
 
 
             var html = @"https://www.asriran.com/fa/links";
-            string srch = "سایت";
-            // int dpth = 100;
-            // string[] linksout;
+            //  var html = @"https://www.tasnimnews.com/";
+            string srch = "اجتماعی";
+            int dpth = 100;
+            string[] linksout;
 
-            await Crawler(html , srch);
-            // if (linksout.Count() < dpth)
-            // {
-            //     dpth = linksout.Count();
-            // }
-            // string[] linksout2;
+            linksout = await Crawler(html, srch);
+            if (linksout.Count() < dpth)
+            {
+                dpth = linksout.Count();
+            }
+            string[] linksout2;
 
-            // for (int i = 0; i < dpth; i++)
-            // {
-            //     Crawler(linksout[i], srch);
-            // }
+            for (int i = 0; i < dpth; i++)
+            {
+               await Crawler(linksout[i], srch);
+            }
 
 
 
@@ -84,10 +85,11 @@ namespace System
         }
 
 
-        private static async Task Crawler(string url, string Verb)
+        private static async Task<string[]> Crawler(string url, string Verb)
         {
 
-           await Task.Run(async ()=>{
+            return await Task.Run(async () =>
+            {
                 try
                 {
                     HtmlWeb web = new HtmlWeb();
@@ -139,18 +141,18 @@ namespace System
 
                     WebSite mysite = new WebSite(ResultName, url, outList, Verb, ResultverbCount);
                     mysite.writeExel();
-                    foreach (var item in mysite.finaloutLinks)
-                    {
-                        await Crawler(item , Verb);
-                        
-                    }
                    
+                        return mysite.finaloutLinks;
+                    
+
 
                 }
                 catch (Exception exep)
                 {
                     Console.WriteLine(exep.Message);
-                   
+                    string[] tst = { "" };
+                    return tst;
+
 
 
                 }
