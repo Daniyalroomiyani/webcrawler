@@ -1,0 +1,6 @@
+C:\Users\daniy\OneDrive\Desktop\MyWebCrawler\WebCrawler\bin\Debug\net7.0\publish\WebCrawler.exe
+C:\Users\daniy\OneDrive\Desktop\MyWebCrawler\WebCrawler\bin\Debug\net7.0\publish\WebCrawler.dll
+C:\Users\daniy\OneDrive\Desktop\MyWebCrawler\WebCrawler\bin\Debug\net7.0\publish\WebCrawler.deps.json
+C:\Users\daniy\OneDrive\Desktop\MyWebCrawler\WebCrawler\bin\Debug\net7.0\publish\WebCrawler.runtimeconfig.json
+C:\Users\daniy\OneDrive\Desktop\MyWebCrawler\WebCrawler\bin\Debug\net7.0\publish\WebCrawler.pdb
+C:\Users\daniy\OneDrive\Desktop\MyWebCrawler\WebCrawler\bin\Debug\net7.0\publish\HtmlAgilityPack.dll
