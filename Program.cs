@@ -40,8 +40,8 @@ namespace System
 
 
             var html = @"https://www.asriran.com/fa/links";
-            //  var html = @"https://www.tasnimnews.com/";
-            string srch = "اجتماعی";
+            // var html = @"https://www.razi.ac.ir/";
+            string srch = "ایران";
             int dpth = 100;
             string[] linksout;
 
@@ -51,12 +51,23 @@ namespace System
                 dpth = linksout.Count();
             }
             string[] linksout2;
-
-            for (int i = 0; i < dpth; i++)
+            string templinks = "";
+            while (linksout.Count() != 0)
             {
-               await Crawler(linksout[i], srch);
+                for (int i = 0; i < dpth; i++)
+                {
+                    linksout2 = await Crawler(linksout[i], srch);
+                    if (linksout2 == null)
+                    {
+                        continue;
+                    }
+                    foreach (var item in linksout2)
+                    {
+                        templinks += item + '-';
+                    }
+                }
+                linksout = templinks.Split('-');
             }
-
 
 
 
@@ -77,11 +88,17 @@ namespace System
             {
                 return "-1";
             }
-            mainDomain = mainDomain.Substring(11);
-            if (str.Contains(mainDomain))
-                return "-1";
+            if (str.Substring(0, 3) == "www" || str.Substring(0, 4) == "http")
+            {
+
+                mainDomain = mainDomain.Substring(mainDomain.IndexOf('.') + 1, mainDomain.Length - mainDomain.IndexOf('.') - 2);
+                if (str.Contains(mainDomain))
+                    return "-1";
+                else
+                    return str;
+            }
             else
-                return str;
+                return "-1";
         }
 
 
@@ -107,7 +124,7 @@ namespace System
 
 
                     // var cRegex = new Regex("<a[\\s]+([^>]+)>((?:.(?!\\<\\/a\\>))*.)</a>");
-                    // var cRegex = new Regex("/(?:(?:https?|ftp):\\/\\/)?[\\w\\-?=%.]+\\.[\\w\\-?=%.]");
+                    // var cRegex = new Regex("^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$");
                     var cRegex = new Regex("((https?|ftp|gopher|telnet|file):((//)|(\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\\\.&]*)");
 
                     var Result = cRegex.Matches(htmlDoc);
@@ -141,9 +158,9 @@ namespace System
 
                     WebSite mysite = new WebSite(ResultName, url, outList, Verb, ResultverbCount);
                     mysite.writeExel();
-                   
-                        return mysite.finaloutLinks;
-                    
+
+                    return mysite.finaloutLinks;
+
 
 
                 }
