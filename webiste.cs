@@ -14,18 +14,25 @@ namespace web
 
         public string[] outLinks;
 
-        public int hits;
+        public int hitFarsi;
+        public int hitEnglish;
+        public int hitFarsi2;
+        public int hitEnglish2;
 
-        public string verb;
+
+
+        // public string verb;
         public string[] finaloutLinks;
 
-        public WebSite(string name, string link, string[] outLinks, string verb, int hits)
+        public WebSite(string name, string link, string[] outLinks, int hitsf, int hitsE , int hitsf2, int hitsE2)
         {
             this.name = name;
             this.link = link;
             this.outLinks = outLinks;
-            this.verb = verb;
-            this.hits = hits;
+            this.hitFarsi = hitsf;
+            this.hitEnglish=hitsE;
+            this.hitFarsi2=hitsf2;
+            this.hitEnglish2= hitsE2;
         }
 
 
@@ -40,7 +47,7 @@ namespace web
 
 
 
-            String[] newLine = { this.name, this.link, this.verb, this.hits.ToString(), ListToString(this.outLinks, this) };
+            String[] newLine = { this.name, this.link, Program.VerbFarsi, this.hitFarsi.ToString() , Program.VerbEnglish ,this.hitEnglish.ToString() , Program.VerbFarsi2 , this.hitFarsi2.ToString() , Program.VerbEnglish2 , this.hitEnglish2.ToString(), ListToString(this.outLinks, this) };
             output.AppendLine(string.Join(separator, newLine));
 
             try
@@ -106,10 +113,17 @@ namespace web
                 {
                     continue;
                 }
+                if (Program.MainList.Contains(item))
+                {
+                    continue;
+                }
+
+                // Program.MainList = "sd";
 
                 String[] newLine = { item.ToString(), mainLink };
                 output.AppendLine(string.Join(separator, newLine));
                 finalLinks++;
+                Program.MainList += item + '-';
                 temp += item.ToString() + '\n';
             }
 

@@ -11,8 +11,47 @@ namespace System
 
     class Program
     {
+        public static String MainList = "";
+
+        public static String FinalResulList = "";
+
+        public static string VerbFarsi = "موسیقی";
+        public static string VerbEnglish = "music";
+
+
+
+        public static string VerbFarsi2 = "سنتی";
+        public static string VerbEnglish2 = "irani";
+
+
+        public static int maxSiteWisit = 1000;
         static async Task Main(string[] args)
         {
+
+
+
+
+            string fileFinal = Environment.CurrentDirectory + @"\ResultFinal.csv";
+            if (File.Exists(fileFinal))
+            {
+                File.Delete(fileFinal);
+            }
+            String[] headingsF = { "Name", "Link", "Rate" };
+            String separatorF = ",";
+            StringBuilder outputF = new StringBuilder();
+            outputF.AppendLine(string.Join(separatorF, headingsF));
+            try
+            {
+                File.AppendAllText(fileFinal, outputF.ToString());
+                Console.WriteLine("File  Final Init...");
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Data could not be written to the CSV file.");
+                return;
+            }
+
 
 
             string file = Environment.CurrentDirectory + @"\Result.csv";
@@ -20,7 +59,7 @@ namespace System
             {
                 File.Delete(file);
             }
-            String[] headings = { "Name", "Link", "Verb", "Hits", "OutLinks" };
+            String[] headings = { "Name", "Link", "VerbFarsi", "Hit_VerbFarsi", "VerbEnglish", "Hit_VerbEnglish", "VerbFarsi2", "Hit_VerbFarsi2", "VerbEnglish2", "Hit_VerbEnglish2", "OutLinks" };
             String separator = ",";
             StringBuilder output = new StringBuilder();
             output.AppendLine(string.Join(separator, headings));
@@ -40,34 +79,23 @@ namespace System
 
 
             var html = @"https://www.asriran.com/fa/links";
-            // var html = @"https://www.razi.ac.ir/";
-            string srch = "ایران";
-            int dpth = 100;
-            string[] linksout;
+            //  var html = @"https://seoarzan.ir/free-backlinks/";
 
-            linksout = await Crawler(html, srch);
-            if (linksout.Count() < dpth)
+
+            MainList += html + '-';
+
+
+
+
+            while (CharCouner(MainList, '-') < maxSiteWisit)
             {
-                dpth = linksout.Count();
+                Crawler cr = new Crawler(html);
+                cr.start();
             }
-            string[] linksout2;
-            string templinks = "";
-            while (linksout.Count() != 0)
-            {
-                for (int i = 0; i < dpth; i++)
-                {
-                    linksout2 = await Crawler(linksout[i], srch);
-                    if (linksout2 == null)
-                    {
-                        continue;
-                    }
-                    foreach (var item in linksout2)
-                    {
-                        templinks += item + '-';
-                    }
-                }
-                linksout = templinks.Split('-');
-            }
+
+
+
+
 
 
 
@@ -76,106 +104,52 @@ namespace System
 
         }
 
-        public static string filterLinks(string str, string mainDomain)
-        {
-            // string result = "";
-            // result= str.Substring(6 , str.Length-7);
-            if (!str.Contains("www"))
-            {
-                return "-1";
-            }
-            if (!(str.Contains(".ir") || str.Contains(".com")))
-            {
-                return "-1";
-            }
-            if (str.Substring(0, 3) == "www" || str.Substring(0, 4) == "http")
-            {
 
-                mainDomain = mainDomain.Substring(mainDomain.IndexOf('.') + 1, mainDomain.Length - mainDomain.IndexOf('.') - 2);
-                if (str.Contains(mainDomain))
-                    return "-1";
-                else
-                    return str;
-            }
-            else
-                return "-1";
+        public static int CharCouner(string str, char ch)
+        {
+            return str.Count(x => x == '$');
         }
 
 
-        private static async Task<string[]> Crawler(string url, string Verb)
+
+
+
+        public static void WriteFinalExel(String name , string link , int rate)
         {
 
-            return await Task.Run(async () =>
+
+
+            //Here we Can Deside about the Rate 
+
+
+
+
+             string file = Environment.CurrentDirectory + @"\ResultFinal.csv";
+            // String[] headings = { "Name", "Link", "Verb", "Hits" , "OutLonks" };
+            String separator = ",";
+            StringBuilder output = new StringBuilder();
+            // output.AppendLine(string.Join(separator, headings));
+
+
+
+            String[] newLine = {name , link , rate.ToString() };
+            output.AppendLine(string.Join(separator, newLine));
+
+            try
             {
-                try
-                {
-                    HtmlWeb web = new HtmlWeb();
+                File.AppendAllText(file, output.ToString(), Encoding.Default);
+                Console.WriteLine(file);
 
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Data could not be written to the CSV file.");
+                return;
+            }
+            Console.WriteLine(file);
 
-                    var htmlDoc = web.Load(url).ParsedText;
-
-
-                    var cRegexName = new Regex("<title>(.*?)</title>");
-                    var ResultName = cRegexName.Matches(htmlDoc)[0].Groups[1].Value.ToString();
-
-
-                    var cRegexvarb = new Regex(Verb);
-                    var ResultverbCount = cRegexvarb.Matches(htmlDoc).Count;
-
-
-                    // var cRegex = new Regex("<a[\\s]+([^>]+)>((?:.(?!\\<\\/a\\>))*.)</a>");
-                    // var cRegex = new Regex("^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$");
-                    var cRegex = new Regex("((https?|ftp|gopher|telnet|file):((//)|(\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\\\.&]*)");
-
-                    var Result = cRegex.Matches(htmlDoc);
-
-
-
-                    int ValidCountResult = 0;
-                    for (int i = 0; i < Result.Count; i++)
-                    {
-                        if (filterLinks(Result[i].Groups[1].Value.ToString(), url) != "-1")
-                        {
-                            ValidCountResult++;
-                            // outList[i]  = Result[i].Groups[1].Value.ToString().Contains(html).ToString();
-                            // outList[i] = filterLinks( Result[i].Groups[1].Value.ToString() , html ); 
-                        }
-
-                    }
-
-                    string[] outList = new string[ValidCountResult];
-
-                    for (int i = 0; i < ValidCountResult; i++)
-                    {
-                        if (filterLinks(Result[i].Groups[1].Value.ToString(), url) != "-1")
-                        {
-                            // ValidCountResult++;
-                            // outList[i]  = Result[i].Groups[1].Value.ToString().Contains(html).ToString();
-                            outList[i] = filterLinks(Result[i].Groups[1].Value.ToString(), url);
-                        }
-
-                    }
-
-                    WebSite mysite = new WebSite(ResultName, url, outList, Verb, ResultverbCount);
-                    mysite.writeExel();
-
-                    return mysite.finaloutLinks;
-
-
-
-                }
-                catch (Exception exep)
-                {
-                    Console.WriteLine(exep.Message);
-                    string[] tst = { "" };
-                    return tst;
-
-
-
-                }
-            });
 
         }
-
     }
+
 }

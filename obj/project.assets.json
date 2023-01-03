@@ -92,6 +92,7 @@
       ],
       "sources": {
         "C:\\Users\\daniy\\Downloads": {},
+        "https://api.nuget.org/v3/index.json": {},
         "https://nuget.org/api/v2/": {}
       },
       "frameworks": {
