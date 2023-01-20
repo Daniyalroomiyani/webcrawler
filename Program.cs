@@ -15,13 +15,13 @@ namespace System
 
         public static String FinalResulList = "";
 
-        public static string VerbFarsi = "موسیقی";
-        public static string VerbEnglish = "music";
+        public static string VerbFarsi = "همایون";
+        public static string VerbEnglish = "homayoun ";
 
 
 
-        public static string VerbFarsi2 = "سنتی";
-        public static string VerbEnglish2 = "irani";
+        public static string VerbFarsi2 = "شجریان";
+        public static string VerbEnglish2 = "shajarian";
 
 
         public static int maxSiteWisit = 1000;
@@ -79,7 +79,7 @@ namespace System
 
 
             var html = @"https://www.asriran.com/fa/links";
-            //  var html = @"https://seoarzan.ir/free-backlinks/";
+            //  var html = @"http://www.iranhmusic.ir/";
 
 
             MainList += html + '-';
@@ -138,7 +138,7 @@ namespace System
             try
             {
                 File.AppendAllText(file, output.ToString(), Encoding.Default);
-                Console.WriteLine(file);
+                Console.WriteLine(link);
 
             }
             catch (Exception ex)
@@ -146,7 +146,7 @@ namespace System
                 Console.WriteLine("Data could not be written to the CSV file.");
                 return;
             }
-            Console.WriteLine(file);
+            // Console.WriteLine(file);
 
 
         }

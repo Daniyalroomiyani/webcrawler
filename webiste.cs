@@ -81,21 +81,17 @@ namespace web
             }
 
             string file = Environment.CurrentDirectory + @"\" + mainLink + ".csv";
-            if (File.Exists(file))
-            {
-                File.Delete(file);
-            }
-
-
-            String[] headings = { "Link", "From" };
+             String[] headings = { "Link", "From" };
             String separator = ",";
             StringBuilder output = new StringBuilder();
+            if (!File.Exists(file))
+            {
+                
+           
             output.AppendLine(string.Join(separator, headings));
-
-            try
+             try
             {
                 File.AppendAllText(file, output.ToString(), Encoding.Default);
-                Console.WriteLine(file);
 
             }
             catch (Exception ex)
@@ -103,6 +99,11 @@ namespace web
                 Console.WriteLine("Data could not be written to the CSV file.");
                 // return;
             }
+
+            }
+
+
+           
 
             int finalLinks = 0;
             string temp = "";
@@ -130,7 +131,6 @@ namespace web
             try
             {
                 File.AppendAllText(file, output.ToString(), Encoding.Default);
-                Console.WriteLine(file);
 
             }
             catch (Exception ex)

@@ -78,11 +78,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\daniy\\OneDrive\\Desktop\\MyWebCrawler\\WebCrawler\\WebCrawler.csproj",
+      "projectUniqueName": "C:\\Users\\daniy\\OneDrive\\Desktop\\op\\MyWebCrawler\\WebCrawler\\WebCrawler.csproj",
       "projectName": "WebCrawler",
-      "projectPath": "C:\\Users\\daniy\\OneDrive\\Desktop\\MyWebCrawler\\WebCrawler\\WebCrawler.csproj",
+      "projectPath": "C:\\Users\\daniy\\OneDrive\\Desktop\\op\\MyWebCrawler\\WebCrawler\\WebCrawler.csproj",
       "packagesPath": "C:\\Users\\daniy\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\daniy\\OneDrive\\Desktop\\MyWebCrawler\\WebCrawler\\obj\\",
+      "outputPath": "C:\\Users\\daniy\\OneDrive\\Desktop\\op\\MyWebCrawler\\WebCrawler\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\daniy\\AppData\\Roaming\\NuGet\\NuGet.Config"

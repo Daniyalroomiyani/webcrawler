@@ -1,0 +1,5 @@
+C:\Users\daniy\OneDrive\Desktop\op\MyWebCrawler\WebCrawler\obj\Debug\net5.0\WebCrawler.csproj.AssemblyReference.cache
+C:\Users\daniy\OneDrive\Desktop\op\MyWebCrawler\WebCrawler\obj\Debug\net5.0\WebCrawler.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\daniy\OneDrive\Desktop\op\MyWebCrawler\WebCrawler\obj\Debug\net5.0\WebCrawler.AssemblyInfoInputs.cache
+C:\Users\daniy\OneDrive\Desktop\op\MyWebCrawler\WebCrawler\obj\Debug\net5.0\WebCrawler.AssemblyInfo.cs
+C:\Users\daniy\OneDrive\Desktop\op\MyWebCrawler\WebCrawler\obj\Debug\net5.0\WebCrawler.csproj.CoreCompileInputs.cache

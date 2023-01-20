@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Tp2D+Mr5HbcwXj0cZWSFDMouwBukWIS0v0x/3+kFvUKdFhlE1ZhbZlsaVLFlstLHewEln+4A4Zz4tj10GvdZvA==",
+  "dgSpecHash": "NFlsFJHe6jZrAkNGgpdNa0+nX9TAua7Nznt8GiX5TTjLsPuwm9LpL90KvfToH4NnYgfTRAD2Xwn/8AQb5pg42Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\daniy\\OneDrive\\Desktop\\MyWebCrawler\\WebCrawler\\WebCrawler.csproj",
+  "projectFilePath": "C:\\Users\\daniy\\OneDrive\\Desktop\\op\\MyWebCrawler\\WebCrawler\\WebCrawler.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\daniy\\.nuget\\packages\\htmlagilitypack\\1.11.46\\htmlagilitypack.1.11.46.nupkg.sha512"
   ],

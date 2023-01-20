@@ -53,10 +53,10 @@ public class Crawler
 
 
 
-            var Rate =(( ResultverbFarsiCount + ResultverbEnglishCount  ) * 100  ) + ((ResultverbFarsi2Count + ResultverbEnglish2Count ) *50);
+            var Rate = ((ResultverbFarsiCount + ResultverbEnglishCount) * 100) + ((ResultverbFarsi2Count + ResultverbEnglish2Count) * 50);
 
 
-            Program.WriteFinalExel(ResultName , url , Rate);
+            Program.WriteFinalExel(ResultName, url, Rate);
 
             // var cRegex = new Regex("<a[\\s]+([^>]+)>((?:.(?!\\<\\/a\\>))*.)</a>");
             // var cRegex = new Regex("^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$");
@@ -91,7 +91,7 @@ public class Crawler
 
             }
 
-            WebSite mysite = new WebSite(ResultName, url, outList,ResultverbFarsiCount ,ResultverbEnglishCount, ResultverbFarsi2Count , ResultverbEnglish2Count);
+            WebSite mysite = new WebSite(ResultName, url, outList, ResultverbFarsiCount, ResultverbEnglishCount, ResultverbFarsi2Count, ResultverbEnglish2Count);
             mysite.writeExel();
 
             for (int i = 0; i < mysite.finaloutLinks.Count(); i++)
@@ -105,7 +105,7 @@ public class Crawler
         }
         catch (Exception exep)
         {
-            Console.WriteLine(exep.Message);
+            // Console.WriteLine(exep.Message);
 
 
 
@@ -124,10 +124,21 @@ public class Crawler
         {
             return "-1";
         }
+
+        
         if (!(str.Contains(".ir") || str.Contains(".com")))
         {
             return "-1";
         }
+
+
+        if (str.Substring(str.LastIndexOf('/')).Contains('.'))
+        {
+            return "-1";
+        }
+
+
+
         if (str.Substring(0, 3) == "www" || str.Substring(0, 4) == "http")
         {
             if (Program.MainList.Contains(str))
@@ -136,11 +147,11 @@ public class Crawler
             }
 
 
-            mainDomain = mainDomain.Substring(mainDomain.IndexOf('.') + 1, mainDomain.Length - mainDomain.IndexOf('.') - 2);
-            if (str.Contains(mainDomain))
-                return "-1";
-            else
-                return str;
+            // mainDomain = mainDomain.Substring(mainDomain.IndexOf('.') + 1, mainDomain.Length - mainDomain.IndexOf('.') - 2);
+            // if (str.Contains(mainDomain))
+            //     return "-1";
+            // else
+            return str;
         }
         else
             return "-1";
